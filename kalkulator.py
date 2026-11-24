@@ -38,6 +38,9 @@ fungsi = {
         'faktorial': math.factorial,
         'pi': math.pi,
         'e': math.e,
+        'abs': abs,                
+        'ceil': math.ceil,         
+        'floor': math.floor,
 
     }
 
@@ -127,32 +130,38 @@ fungsi['integral'] = integral
 fungsi['grafik'] = grafik
 
 def opr():
-    print('___________________________________________________________________________________________')
+    print('_________________________________________________________________________________________________')
     print('                              KALKULATOR                                          ')
-    print('___________________________________________________________________________________________')
+    print('_________________________________________________________________________________________________')
     print('Petunjuk penggunaan')
-    print('___________________________________________________________________________________________')
+    print('_________________________________________________________________________________________________')
     data = {
         'Dasar & Mutlak': ['+, -, *, /', 'Pangkat: x^y', 'Akar: sqrt(x)', 'Mutlak: abs(x)'],
+        '_': ['','','',''],
         'Log & Konstanta': ['Log10: log(x)', 'Log Natural: ln(x)', 'Konstanta: pi, e', 'Faktorial: faktorial(x)'],
+        ' _': ['','','',''],
         'Trigonometri': ['sin(x), cos(x), tan(x)', 'asin(x), acos(x), atan(x)', 'Pembulatan: ceil, floor', ''],
+        '_ ': ['','','',''],
         'Grafik (Matplotlib)': ['integral("fx", a, b)', 'integral("fx", a, b, False)', 'grafik("fx", min, max)', '']
     } 
     
     df = pd.DataFrame(data, index = range(1, 5))
     print(df.to_string(index=False))
-    print('__________________________________________________________________________________________')
+    print('_________________________________________________________________________________________________')
     print('Contoh input : 2 + 3 x sin(30) - sqrt(16) + 2^3')
     print('Contoh 1 : integral("x^2 + 2x", 0, 3)   --> hitung integral & tampilkan arsiran grafik')
     print('Contoh 2 : grafik("sin(x)", -360, 360)  --> gambar kurva sinus dari -360° sampai 360°')
     print('Contoh 3 : grafik("abs(x - 2)", -5, 9)  --> gambar grafik nilai mutlak')
+    print('________________________________________________________________________________________________')
     print('tekan enter untuk hasilnya dan ketik "keluar" untuk berhenti perhitungan')
+    print('________________________________________________________________________________________________')
 
     ans = 0.0
 
     
     while True:
         a = input('Hitung: ').strip().lower()
+        print('___________________________________________________________________________________________')
         if a in ['keluar', 'exit', 'q']:
             print('kalkulator berhenti')
             break
@@ -174,15 +183,15 @@ def opr():
             hasil = eval(b,{"__builtins__": None}, fungsi)
             if isinstance(hasil, str):
                 print(f'{hasil}\n')
-
             else:
                 if isinstance(hasil, float) and hasil.is_integer():
                    hasil = int(hasil)
                 elif isinstance(hasil, float):
                    hasil = round(hasil, 8)
-
             ans = hasil
             print(f'= {hasil}\n')
+            print('___________________________________________________________________________________________')
+            print('===========================================================================================')
         except ZeroDivisionError:
             print('Error: Tidak bisa membagi dengan nol.\n')
         except ValueError as e:
